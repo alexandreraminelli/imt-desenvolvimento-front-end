@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Microdados - Filme</title>
+  </head>
+  <body>
+    <div>
+      <article itemscope itemtype="https://schema.org/Movie">
+        <!-- Nome do item (Movie) -->
+        <h1 itemprop="name">Nasce uma Estrela</h1>
+
+        <!-- Breve descrição que resume um CreativeWork (Trabalho Criativo)-->
+        <p itemprop="abstract">Um músico ajuda uma jovem cantora a encontrar fama enquanto a idade e o alcoolismo colocam sua carreira em uma espiral descendente.</p>
+
+        <div>
+          <!-- Imagem do item -->
+          <img itemprop="image" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/39/A_Star_is_Born.png/220px-A_Star_is_Born.png" alt="Filme Nasce uma Estrela" />
+        </div>
+
+        <footer itemprop="director" itemscope="https://schema.org/Person">
+          Diretor:
+          <span itemprop="name">Bradley Cooper. </span>
+          <span itemprop="birthDate">5 de Janeiro, 1975.</span>
+        </footer>
+      </article>
+    </div>
+  </body>
+</html>
