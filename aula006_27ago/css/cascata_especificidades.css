@@ -1,0 +1,21 @@
+#titulo {
+  color: blue;
+}
+.descricao {
+  color: red;
+}
+p {
+  color: green;
+}
+
+.principal article {
+  background-color: goldenrod;
+}
+main article {
+  background-color: bisque;
+}
+
+main,
+article {
+  border: 3px solid red;
+}

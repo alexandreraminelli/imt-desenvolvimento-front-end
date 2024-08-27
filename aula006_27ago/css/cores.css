@@ -1,0 +1,26 @@
+p {
+  padding: 10px;
+}
+
+.ciencia {
+  background-color: aqua;
+  color: brown;
+
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1.5em;
+  font-weight: lighter;
+}
+.sistemas {
+  background-color: rgb(11, 101, 100);
+  color: rgb(240, 194, 252);
+
+  font-family: cursive;
+  font-size: 1.5em;
+}
+.inteligencia {
+  background-color: #057805;
+  color: #e8a;
+
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: 1.5em;
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      article > p {
+        padding: 10px;
+        background-color: aqua;
+      }
+      article p {
+        border: solid 1px red;
+      }
+      #principal p.promocao {
+        padding: 10px;
+        background-color: burlywood;
+      }
+      body #principal article section p.coordenadores {
+        text-align: center;
+      }
+      main > article section > p.coordenadores {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <main id="principal">
+      <p class="promocao nova">Venha conversar conosco e conhecer nossas ofertas de <strong>bolsas de estudos</strong>.</p>
+      <p>Cursos:</p>
+      <article>
+        <p class="novo-curso">Medicina</p>
+        <p class="curso">Engenharia da Computação</p>
+        <p class="curso">Farmácia</p>
+        <section>
+          <p class="coordenadores">Nossos coordenadores estão te esperando</p>
+        </section>
+      </article>
+
+      
+    </main>
+  </body>
+</html>
