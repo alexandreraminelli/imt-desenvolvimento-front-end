@@ -1,0 +1,39 @@
+html {
+  font-size: 100%;
+}
+body {
+  font-size: 14px;
+  background-color: #f2f2f2;
+}
+
+.primeiro,
+.segundo,
+.terceiro {
+  background-color: aquamarine;
+  border: solid black 1px;
+  width: 80vw;
+
+  padding: 10px;
+
+  margin: 20px;
+}
+
+.terceiro {
+  margin-top: -20px;
+}
+
+.quarto {
+  border: solid red 2px;
+  background-color: darkkhaki;
+
+  width: 450px;
+  margin: auto;
+  padding: 10px 15px;
+}
+
+article {
+  box-sizing: content-box;
+  width: 90vw;
+  background-color: #1e1e1e;
+  padding: 30px 10px;
+}
