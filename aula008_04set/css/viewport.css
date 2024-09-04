@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+}
+
+h1 {
+  margin: 0;
+}
+
+/* 
+ * Configuração no Main, usando a classe para dar força no
+ * seletor
+ */
+.principal {
+  width: 400px;
+  height: 400px;
+  background-color: aqua;
+}
