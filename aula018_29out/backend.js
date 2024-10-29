@@ -9,6 +9,8 @@ const cors = require("cors")
 // Mongoose:
 const mongoose = require("mongoose")
 
+const uniqueValidator = require("mongoose-unique-validator")
+
 const app = express()
 
 app.use(express.json())
@@ -22,9 +24,22 @@ const Filme = mongoose.model(
   })
 )
 
+//
+const usuarioSchema = mongoose.Schema({
+  login: {
+    type: String, // tipo de dado: String
+    require: true, // Obrigatório: sim
+    unique: true, // Único: sim
+  },
+  password: { type: String, require: true },
+})
+usuarioSchema.plugin(uniqueValidator)
+const Usuario = mongoose.model("usuario", usuarioSchema)
+
 // Conexão com o banco de dados
 async function conectarAoMongo() {
-  await mongoose.connect(`mongodb+srv://alexandreraminelli9491:404IleAQURtU1QHp@cluster0.bmq1r.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`)
+  // await mongoose.connect(`mongodb+srv://alexandreraminelli9491:404IleAQURtU1QHp@cluster0.bmq1r.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`)
+  await mongoose.connect(`mongodb+srv://pro_mac:mongo123@cluster0.skf8n.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`)
 }
 
 let filmes = [
@@ -43,7 +58,7 @@ let filmes = [
 // Buscar filmes
 app.get("/filmes", async (req, res) => {
   const filmes = await Filme.find()
-  res.json(Filmes)
+  res.json(filmes)
 })
 
 // Criar filmes
@@ -63,6 +78,21 @@ app.post("/filmes", async (req, res) => {
 
   // Retornar lista nova de filmes
   res.json(filmes)
+})
+
+app.post("/signup", async (req, res) => {
+  // Obter a entrada do usuário
+  const login = req.body.login
+  const password = req.body.password
+
+  const usuario = new Usuario({
+    login: login,
+    password: password,
+  })
+  const respMongo = await usuario.save()
+  console.log(respMongo)
+  // Finalizar requisição e evitar timeout
+  res.end()
 })
 
 app.listen(3000, () => {
