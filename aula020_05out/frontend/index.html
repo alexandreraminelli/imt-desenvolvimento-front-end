@@ -10,7 +10,64 @@
   </head>
 
   <body onload="obterFilmes()">
-    <!-- Conteúdo -->
+    <!-- Conteúdo do body -->
+
+    <div class="modal fade" id="modalCadastro" aria-labelledby="modalCadastro" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Cabeçalho do modal -->
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Cadastro de Usuários</h1>
+          </div>
+          <!-- Corpo do modal -->
+          <div class="modal-body">
+            <div class="d-none alert alert-dismissible fade alert-modal-cadastro" role="alert"></div>
+            <!-- Usuário -->
+            <div class="mb-3">
+              <label for="usuarioCadastroInput" class="col-form-label">Usuário</label>
+              <input type="text" id="usuarioCadastroInput" class="form-control" />
+            </div>
+            <!-- Senha -->
+            <div class="mb-3">
+              <label for="passwordCadastroInput" class="col-form-label">Senha</label>
+              <input type="password" id="passwordCadastroInput" class="form-control" />
+            </div>
+          </div>
+          <!-- Rodapé do modal -->
+          <div class="modal-footer">
+            <!-- Botões -->
+            <!-- Botão Cancelar -->
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <!-- Botão Cadastrar -->
+            <button type="button" class="btn btn-primary">Cadastrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navbar -->
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <nav class="navbar navbar-expand-md bg-light">
+            <a href="#" class="navbar-brand">Filme</a>
+            <!-- Botão hambúrguer -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNav" aria-controls="myNav" aria-expanded="false">
+              <!-- Ícone de hambúrguer -->
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="myNav">
+              <!-- Lista de links do navbar -->
+              <div class="navbar-nav ms-auto">
+                <a href="#" class="nav-link active me-2" aria-current="page">Login</a>
+                <a href="#" class="nav-link active me-2" data-bs-toggle="modal" data-bs-target="#modalCadastro" aria-current="page">Cadastro</a>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
 
     <!-- Campo de alerta de campo não preenchido (oculto por padrão) -->
     <div class="row justify-content-center">
