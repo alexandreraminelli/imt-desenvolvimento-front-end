@@ -27,13 +27,13 @@ const Filme = mongoose.model(
 const usuarioSchema = mongoose.Schema({
   login: {
     type: String, // tipo de dado: String
-    require: true, // Obrigatório: sim
+    required: true, // Obrigatório: sim
     unique: true, // Único: sim
   },
-  password: { type: String, require: true },
+  password: { type: String, required: true },
 })
 usuarioSchema.plugin(uniqueValidator)
-const Usuario = mongoose.model("usuario", usuarioSchema)
+const Usuario = mongoose.model("Usuario", usuarioSchema)
 
 // Conexão com o banco de dados
 async function conectarAoMongo() {

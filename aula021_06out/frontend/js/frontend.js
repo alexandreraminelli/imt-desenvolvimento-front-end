@@ -9,8 +9,6 @@
 const protocolo = "http://"
 /** URL base: localhost:3000 */
 const baseURL = "localhost:3000"
-/** Endpoint para consultar filmes: "/filmes" */
-const filmesEndpoint = "/filmes"
 
 /**
  * Lista os filmes em uma tabela.
@@ -47,6 +45,9 @@ function listarFilmes(filmes) {
  * Vai montando a página e quando carregar o elemento, insere ele nela.
  */
 async function obterFilmes() {
+  /** Endpoint para consultar filmes: "/filmes" */
+  const filmesEndpoint = "/filmes"
+
   // Montar URL completa usando templates de strings
   const URLcompleta = `${protocolo}${baseURL}${filmesEndpoint}`
   // Requisição assíncrona (pode esperar: palavra await)
@@ -60,6 +61,9 @@ async function obterFilmes() {
  * É uma função assíncrona.
  */
 async function cadastrarFilme() {
+  /** Endpoint para consultar filmes: "/filmes" */
+  const filmesEndpoint = "/filmes"
+
   // Construir URL completa
   const URLcompleta = `${protocolo}${baseURL}${filmesEndpoint}`
 
@@ -97,5 +101,90 @@ async function cadastrarFilme() {
       },
       5000 // Tempo em ms
     )
+  }
+}
+
+/**
+ * Cadastra um usuário no servidor.
+ */
+async function cadastrarUsuario() {
+  // Obter dados do form
+  let usuarioCadastroInput = document.querySelector("#usuarioCadastroInput")
+  let passwordCadastroInput = document.querySelector("#passwordCadastroInput")
+  // Armazenar entrada em variáveis
+  let usuarioCadastro = usuarioCadastroInput.value
+  let passwordCadastro = passwordCadastroInput.value
+
+  // Validação
+  if (usuarioCadastro && passwordCadastro) {
+    /* Se ambos os campos estiverem preenchidos
+     * Cadastrar o usuário no servidor
+     */
+    try {
+      const cadastroEndpoint = "/signup"
+      const URLcompleta = `${protocolo}${baseURL}${cadastroEndpoint}`
+
+      await axios.post(
+        URLcompleta,
+        // Objeto JSON
+        {
+          login: usuarioCadastro,
+          password: passwordCadastro,
+        }
+      )
+
+      // Limpar os campos depois de enviar
+      usuarioCadastroInput.value = ""
+      passwordCadastroInput.value = ""
+
+      // Mensagem
+      // Obter elemento DOM alert-modal-cadastro
+      let alert = document.querySelector(".alert-modal-cadastro")
+      // Mensagem de erro
+      alert.innerHTML = "Usuário cadastrado com sucesso!"
+      // Exibir alert
+      alert.classList.add("show", "alert-success")
+      alert.classList.remove("d-none")
+      // Alert desaparecer após 3s
+      setTimeout(() => {
+        alert.classList.remove("show", "alert-success")
+        alert.classList.add("d-none")
+
+        /* ocultar o modal */
+        // Obter instância a partir do bootstrap
+        let modalCadastro = bootstrap.Modal.getInstance(document.querySelector("#modalCadastro"))
+        modalCadastro.hide()
+      }, 3000)
+    } catch (e) {
+      /* tratamento de erro */
+      // Obter elemento DOM alert-modal-cadastro
+      let alert = document.querySelector(".alert-modal-cadastro")
+      // Mensagem de erro
+      alert.innerHTML = "Não foi possível realizar o cadastros!"
+      // Exibir alert
+      alert.classList.add("show", "alert-danger")
+      alert.classList.remove("d-none")
+      // Alert desaparecer após 3s
+      setTimeout(() => {
+        alert.classList.remove("show", "alert-danger")
+        alert.classList.add("d-none")
+      }, 3000)
+    }
+  } else {
+    /* Se um dos campos não está preenchido:
+     * Exibir mensagem de erro
+     */
+    // Obter elemento DOM alert-modal-cadastro
+    let alert = document.querySelector(".alert-modal-cadastro")
+    // Mensagem de erro
+    alert.innerHTML = "Preencha todos os campos!"
+    // Exibir alert
+    alert.classList.add("show", "alert-danger")
+    alert.classList.remove("d-none")
+    // Alert desaparecer após 3s
+    setTimeout(() => {
+      alert.classList.remove("show", "alert-danger")
+      alert.classList.add("d-none")
+    }, 3000)
   }
 }
