@@ -11,6 +11,45 @@ const protocolo = "http://"
 const baseURL = "localhost:3000"
 
 /**
+ * Exibe uma mensagem de alerta.
+ *
+ * @param {*} seletor Elemento que permite selecionar o modal
+ * @param {*} innerHTML Conteúdo HTML exibido na mensagem.
+ * @param {*} classesToAdd Classes para serem adicionadas e tornar o alerta visível.
+ * @param {*} classesToRemove Classes para serem removidas que tornam o alerta invisível.
+ * @param {*} timeout Tempo que a mensagem será exibida.
+ */
+function exibeAlerta(seletor, innerHTML, classesToAdd, classesToRemove, timeout) {
+  // Obter elemento pelo DOM
+  let alert = document.querySelector(seletor)
+  // Mensagem
+  alert.innerHTML = innerHTML
+
+  // Adicionar classes informadas
+  alert.classList.add(...classesToAdd)
+  // Remover classes informadas
+  alert.classList.remove(...classesToRemove)
+
+  // Voltar ao estado anterior após um período
+  setTimeout(() => {
+    // Remover classes adicionadas
+    alert.classList.remove(...classesToAdd)
+    // Devolver classes removidas
+    alert.classList.add(...classesToRemove)
+  }, timeout)
+}
+
+/**
+ * Oculta o modal.
+ */
+function escondeModal(idModal, timeout) {
+  setTimeout(() => {
+    let modalCadastro = bootstrap.Modal.getInstance(document.querySelector(idModal))
+    modalCadastro.hide()
+  }, timeout)
+}
+
+/**
  * Lista os filmes em uma tabela.
  */
 function listarFilmes(filmes) {
@@ -87,20 +126,8 @@ async function cadastrarFilme() {
     // Listar os filmes
     listarFilmes(filmes)
   } else {
-    let alert = document.querySelector(".alert")
     // Exibir mensagem de alerta
-    alert.classList.add("show")
-    alert.classList.remove("d-none")
-
-    // Sumir após 5 segundos
-    setTimeout(
-      // ação (função)
-      () => {
-        alert.classList.remove("show")
-        alert.classList.add("d-none")
-      },
-      5000 // Tempo em ms
-    )
+    exibeAlerta(".alert-filme", "Preencha todos os campos!", ["alert-danger", "show"], ["d-none"], 5000)
   }
 }
 
@@ -138,53 +165,16 @@ async function cadastrarUsuario() {
       passwordCadastroInput.value = ""
 
       // Mensagem
-      // Obter elemento DOM alert-modal-cadastro
-      let alert = document.querySelector(".alert-modal-cadastro")
-      // Mensagem de erro
-      alert.innerHTML = "Usuário cadastrado com sucesso!"
-      // Exibir alert
-      alert.classList.add("show", "alert-success")
-      alert.classList.remove("d-none")
-      // Alert desaparecer após 3s
-      setTimeout(() => {
-        alert.classList.remove("show", "alert-success")
-        alert.classList.add("d-none")
-
-        /* ocultar o modal */
-        // Obter instância a partir do bootstrap
-        let modalCadastro = bootstrap.Modal.getInstance(document.querySelector("#modalCadastro"))
-        modalCadastro.hide()
-      }, 3000)
+      exibeAlerta(".alert-modal-cadastro", "Usuário cadastrado com sucesso!", ["show", "alert-success"], ["d-none"], 5000)
     } catch (e) {
       /* tratamento de erro */
-      // Obter elemento DOM alert-modal-cadastro
-      let alert = document.querySelector(".alert-modal-cadastro")
-      // Mensagem de erro
-      alert.innerHTML = "Não foi possível realizar o cadastros!"
-      // Exibir alert
-      alert.classList.add("show", "alert-danger")
-      alert.classList.remove("d-none")
-      // Alert desaparecer após 3s
-      setTimeout(() => {
-        alert.classList.remove("show", "alert-danger")
-        alert.classList.add("d-none")
-      }, 3000)
+      // Exibir mensagem de erro de sistema
+      exibeAlerta(".alert-modal-cadastro", "Não foi possível realizar o cadastro!", ["show", "alert-danger"], ["d-none"], 5000)
     }
   } else {
     /* Se um dos campos não está preenchido:
-     * Exibir mensagem de erro
+     * Exibir mensagem de erro do usuário
      */
-    // Obter elemento DOM alert-modal-cadastro
-    let alert = document.querySelector(".alert-modal-cadastro")
-    // Mensagem de erro
-    alert.innerHTML = "Preencha todos os campos!"
-    // Exibir alert
-    alert.classList.add("show", "alert-danger")
-    alert.classList.remove("d-none")
-    // Alert desaparecer após 3s
-    setTimeout(() => {
-      alert.classList.remove("show", "alert-danger")
-      alert.classList.add("d-none")
-    }, 3000)
+    exibeAlerta(".alert-modal-cadastro", "Preencha todos os campos!", ["show", "alert-warning"], ["d-none"], 5000)
   }
 }

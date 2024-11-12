@@ -21,7 +21,7 @@
           </div>
           <!-- Corpo do modal -->
           <div class="modal-body">
-            <div class="d-none alert alert-dismissible fade alert-modal-cadastro" role="alert"></div>
+            <!-- Formulário -->
             <!-- Usuário -->
             <div class="mb-3">
               <label for="usuarioCadastroInput" class="col-form-label">Usuário</label>
@@ -32,6 +32,8 @@
               <label for="passwordCadastroInput" class="col-form-label">Senha</label>
               <input type="password" id="passwordCadastroInput" class="form-control" />
             </div>
+            <!-- Mensagem (sucesso ou erro) -->
+            <div class="d-none alert alert-dismissible fade alert-modal-cadastro" role="alert"></div>
           </div>
           <!-- Rodapé do modal -->
           <div class="modal-footer">
@@ -99,6 +101,7 @@
 
       <div class="row justify-content-center">
         <div class="col-md-8">
+          <!-- Botão que cadastra filmes -->
           <button class="btn btn-outline-primary w-100" onclick="cadastrarFilme()">Cadastrar Filme</button>
         </div>
       </div>
