@@ -11,6 +11,13 @@ const protocolo = "http://"
 const baseURL = "localhost:3000"
 
 /**
+ * Montar a URL.
+ */
+function montarURL(endpoint) {
+  return `${protocolo}${baseURL}${endpoint}`
+}
+
+/**
  * Exibe uma mensagem de alerta.
  *
  * @param {*} seletor Elemento que permite selecionar o modal
@@ -44,8 +51,8 @@ function exibeAlerta(seletor, innerHTML, classesToAdd, classesToRemove, timeout)
  */
 function escondeModal(idModal, timeout) {
   setTimeout(() => {
-    let modalCadastro = bootstrap.Modal.getInstance(document.querySelector(idModal))
-    modalCadastro.hide()
+    let modal = bootstrap.Modal.getInstance(document.querySelector(idModal))
+    modal.hide()
   }, timeout)
 }
 
@@ -177,4 +184,77 @@ async function cadastrarUsuario() {
      */
     exibeAlerta(".alert-modal-cadastro", "Preencha todos os campos!", ["show", "alert-warning"], ["d-none"], 5000)
   }
+}
+
+/* */
+const fazerLogin = async () => {
+  // Obter elementos DOM
+  let usuarioLoginInput = document.querySelector("#usuarioLoginInput")
+  let passwordLoginInput = document.querySelector("#passwordLoginInput")
+  // Obter dados do formulário de login
+  let usuarioLogin = usuarioLoginInput.value
+  let passwordLogin = passwordLoginInput.value
+
+  // Verificar se dados são válidos
+  if (usuarioLogin && passwordLogin) {
+    /* Se ambos os campos estiverem preenchidos */
+    try {
+      /* Realizar a autenticação */
+      // Montar a URL completa
+      const URLcompleta = montarURL("/login")
+      //
+      const response = await axios.post(
+        URLcompleta, // URL completa
+        { login: usuarioLogin, password: passwordLogin } // Objeto JSON
+      )
+      // Gerar token
+      localStorage.setItem("token", response.data)
+
+      // Limpar as caixas
+      usuarioLoginInput.value = ""
+      passwordLoginInput.value = ""
+
+      // Exibir mensagem de login realizado com sucesso
+      exibeAlertaLogin("Login realizado com sucesso!", "alert-success")
+
+      // Ocultar o Modal
+      // escondeModal("#modalLogin", 1000)
+
+      // Alterar link de "Login" para "Logout"
+      const loginLink = document.querySelector("#loginLink")
+      loginLink.innerHTML = "Logout"
+
+      // Habilitar botão
+      const cadastrarFilmeButton = document.querySelector("#cadastrarFilmeButton")
+      cadastrarFilmeButton.classList.remove("disabled")
+    } catch (e) {
+      /* Se houver um erro na autenticação */
+      // Alerta de erro no login
+      exibeAlertaLogin("Falha na autenticação!", "alert-danger")
+
+      escondeModal("#modalLogin", 2000)
+    }
+  } else {
+    /* Se um ou ambos os campos estiverem vazios */
+    // Exibir alerta de preencha todos os campos
+    exibeAlertaLogin("Preencha todos os campos!", "alert-warning")
+  }
+}
+
+/** Exibe alerta de login.
+ * @param {String} mensagem Mensagem a ser exibida
+ * @param {String} tipo Tipo de alerta (classe do Bootstrap)
+ */
+function exibeAlertaLogin(mensagem, tipo) {
+  // Lista de classes de outros tipos a remover
+  let outrosTipos = ["alert-success", "alert-warning", "alert-danger"].filter((c) => c !== tipo)
+
+  // Chamar a função exibeAlertaLogin
+  exibeAlerta(
+    ".alert-modal-login", // elemento
+    mensagem, // mensagem do alerta
+    ["show", tipo], // classes a serem adicionadas
+    ["d-none", ...outrosTipos], // classes a serem removidas
+    2000 // tempo de exibição
+  )
 }

@@ -34,7 +34,7 @@
               <label for="passwordCadastroInput" class="col-form-label">Senha</label>
               <input type="password" id="passwordCadastroInput" class="form-control" />
             </div>
-            <!-- Mensagem (sucesso ou erro) -->
+            <!-- Alerta de cadastro -->
             <div class="d-none alert alert-dismissible fade alert-modal-cadastro" role="alert"></div>
           </div>
 
@@ -65,16 +65,16 @@
             <!-- Formulário -->
             <!-- Campo Usuário -->
             <div class="mb-3">
-              <label for="usuarioCadastroInput" class="col-form-label">Usuário</label>
-              <input type="text" id="usuarioCadastroInput" class="form-control" />
+              <label for="usuarioLoginInput" class="col-form-label">Usuário</label>
+              <input type="text" id="usuarioLoginInput" class="form-control" />
             </div>
             <!-- Campo Senha -->
             <div class="mb-3">
-              <label for="passwordCadastroInput" class="col-form-label">Senha</label>
-              <input type="password" id="passwordCadastroInput" class="form-control" />
+              <label for="passwordLoginInput" class="col-form-label">Senha</label>
+              <input type="password" id="passwordLoginInput" class="form-control" />
             </div>
-            <!-- Mensagem (sucesso ou erro) -->
-            <div class="d-none alert alert-dismissible fade alert-modal-cadastro" role="alert"></div>
+            <!-- Alerta de login -->
+            <div class="d-none alert alert-dismissible fade alert-modal-login" role="alert"></div>
           </div>
 
           <!-- Rodapé do modal -->
@@ -83,7 +83,7 @@
             <!-- Botão Cancelar -->
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
             <!-- Botão Cadastrar -->
-            <button onclick="loginUsuario()" type="button" class="btn btn-primary">Entrar</button>
+            <button onclick="fazerLogin()" type="button" class="btn btn-primary">Entrar</button>
           </div>
         </div>
       </div>
@@ -104,9 +104,9 @@
             <div class="collapse navbar-collapse" id="myNav">
               <!-- Lista de links do navbar -->
               <div class="navbar-nav ms-auto">
-                <!-- Link Login -->
-                <a href="#" class="nav-link active me-2" data-bs-toggle="modal" data-bs-target="#modalLogin" aria-current="page">Login</a>
-                <!-- Link Cadastro -->
+                <!-- Link de Login -->
+                <a id="loginLink" href="#" class="nav-link active me-2" data-bs-toggle="modal" data-bs-target="#modalLogin" aria-current="page">Login</a>
+                <!-- Link de Cadastro -->
                 <a href="#" class="nav-link active me-2" data-bs-toggle="modal" data-bs-target="#modalCadastro" aria-current="page">Cadastro</a>
               </div>
             </div>
@@ -145,8 +145,8 @@
 
       <div class="row justify-content-center">
         <div class="col-md-8">
-          <!-- Botão que cadastra filmes -->
-          <button class="btn btn-outline-primary w-100 disabled" onclick="cadastrarFilme()">Cadastrar Filme</button>
+          <!-- Botão de cadastrar filmes -->
+          <button id="cadastrarFilmeButton" class="btn btn-outline-primary w-100 disabled" onclick="cadastrarFilme()">Cadastrar Filme</button>
         </div>
       </div>
 
